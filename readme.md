@@ -58,7 +58,7 @@ The workflows below breakdown the various different operations in order to creat
 | 22 | connect to applicaiton account | use jwt to create nats connection to applicaiton acount | client |
 | 23 | consume services | client consumes services as part of running applicaiton | client |
 ### simplified sequence
-::: mermaid
+``` mermaid
 sequenceDiagram
 client <<->> startup: 1. checks credentials
 client ->> auth service: 2. send encrypted registration request
@@ -66,9 +66,9 @@ auth service <<->> backend logic: 3. decrypt, validate, and generate credential
 auth service ->> client: 4. respond with credential
 client <<->> validate crednetial: 5. client validates response
 client ->> application account: 6. Client connects to applicaiton account with new credential
-:::
+```
 ### detailed sequence
-::: mermaid
+``` mermaid
 sequenceDiagram
 client ->> credentials: 1. client checks if credentials exist
 credentials ->> client: 2. client has no credential
@@ -80,9 +80,9 @@ auth-service <<->> validation: 7. validate request and process it
 auth-service ->> response: 8. generate response and encrypts with client public key
 response ->> client: 9. client recieves response and decrypts it
 client ->> nats-account: 10. client uses credential to connect to nats account
-:::
+```
 ### flowchart
-::: mermaid
+``` mermaid
 flowchart LR
 subgraph client
     aac["auth account connection"] -->|1: client sends request| request
@@ -125,7 +125,7 @@ response -->|19: send response to inbox| auth.reponse.inbox["auth.response.{inbo
 auth.register -->|3: begin parsing| request-parse
 appac -->|23. user application account resources| services & kvs & streams
 response-decrypt -->|20: read response and begin decrypting| auth.reponse.inbox
-:::
+```
 ## renew client
 ## unregister client
 ## refresh client
