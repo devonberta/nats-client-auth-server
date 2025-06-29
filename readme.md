@@ -1,8 +1,11 @@
-# auth register service
+# Client Auth Server
 This service seeks to solve a chicken or the egg problem that exists with registering clients in nats without out of bound distribution of keys.
 
 The problem and potential solution suggested here in the JWT in depth guide:
 https://docs.nats.io/running-a-nats-service/nats_admin/security/jwt#account-based-setup
+
+Some inspiration for components and functionality of this implementation come from Hashicorps secret zero solution approach as reference below. We do not implement seal wrapping but we do implement the idea of seperating the context of retrieval identification from the credential itself. Providing something that we can audit and manage to ensure the integrity of the credential retrieval process: (No hashicorp tooling is required to use this server. Am just giving credit where credit is due for the inspiration around approaches in designing this service.)
+https://www.hashicorp.com/en/resources/vault-response-wrapping-makes-the-secret-zero-challenge-a-piece-of-cake
 
 # Challenges in implementing:
 The suggested solution creates a few security problems for us because of the suggested shared account:
